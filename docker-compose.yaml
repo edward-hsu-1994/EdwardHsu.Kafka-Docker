@@ -1,0 +1,17 @@
+version: "3.9"
+services:
+  zookeeper:
+    build: ./zookeeper
+    ports:
+      - "2181:2181"
+  kafka:
+    build: ./kafka
+    depends_on:
+      - zookeeper
+    ports:
+      - "9092:9092"
+    environment:
+      - ZOOKEEPER_HOST=zookeeper
+      - LISTENERS=PLAINTEXT://:9092
+      - ADV_LISTENERS=PLAINTEXT://127.0.0.1:9092
+    command: tail -f /dev/null 

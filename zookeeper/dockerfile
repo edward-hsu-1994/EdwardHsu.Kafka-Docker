@@ -1,0 +1,18 @@
+# Edward.Hsu Zookeeper
+FROM ubuntu:18.04
+EXPOSE 2181
+
+RUN apt update
+RUN apt install wget default-jre -y
+
+WORKDIR /opt
+RUN wget https://downloads.apache.org/zookeeper/zookeeper-3.6.2/apache-zookeeper-3.6.2-bin.tar.gz
+RUN tar -xvf apache-zookeeper-3.6.2-bin.tar.gz
+RUN mv apache-zookeeper-3.6.2-bin zookeeper
+RUN rm apache-zookeeper-3.6.2-bin.tar.gz
+
+WORKDIR /opt/zookeeper/conf
+RUN cp zoo_sample.cfg zoo.cfg
+
+WORKDIR /opt/zookeeper/bin
+ENTRYPOINT ["./zkServer.sh", "start-foreground"]

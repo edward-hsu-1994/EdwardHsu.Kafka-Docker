@@ -1,0 +1,22 @@
+# Edward.Hsu Kafka
+FROM ubuntu:18.04
+EXPOSE 9092
+ENV CONFIG_FILE=/opt/kafka/config/server.properties
+ENV BROKER_ID=0
+ENV ZOOKEEPER_HOST=127.0.0.1
+ENV LISTENERS=PLAINTEXT://:9092
+ENV ADV_LISTENERS=PLAINTEXT://your.host.name:9092
+
+RUN apt update
+RUN apt install wget default-jre -y
+
+WORKDIR /opt
+RUN wget https://downloads.apache.org/kafka/2.7.0/kafka_2.13-2.7.0.tgz
+RUN tar -xvf kafka_2.13-2.7.0.tgz
+RUN mv kafka_2.13-2.7.0 kafka
+RUN rm kafka_2.13-2.7.0.tgz
+
+WORKDIR /opt/kafka/bin
+COPY ./run.sh run.sh
+
+ENTRYPOINT ./run.sh
