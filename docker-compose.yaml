@@ -14,4 +14,3 @@ services:
       - ZOOKEEPER_HOST=zookeeper
       - LISTENERS=PLAINTEXT://:9092
       - ADV_LISTENERS=PLAINTEXT://127.0.0.1:9092
-    command: tail -f /dev/null 
