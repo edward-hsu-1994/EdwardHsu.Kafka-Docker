@@ -12,5 +12,6 @@ services:
       - "9092:9092"
     environment:
       - ZOOKEEPER_HOST=zookeeper
-      - LISTENERS=PLAINTEXT://:9092
-      - ADV_LISTENERS=PLAINTEXT://127.0.0.1:9092
+      - HOST=127.0.0.1
+      - USERNAME=user
+      - PASSWORD=pwd
